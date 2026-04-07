@@ -11,15 +11,26 @@ ARTIFACTS_DIR = ROOT_DIR / "models" / "artifacts"
 MODEL_PATH = MODELS_DIR / "best_model.pkl"
 LABEL_ENCODER_PATH = ARTIFACTS_DIR / "label_encoder.pkl"
 
-model = joblib.load(MODEL_PATH)
-label_encoder = joblib.load(LABEL_ENCODER_PATH)
+
+def load_artifacts():
+    """
+    Lazy-load model artifacts only when prediction is requested.
+    """
+    if not MODEL_PATH.exists():
+        raise FileNotFoundError(f"Model file not found: {MODEL_PATH}")
+
+    if not LABEL_ENCODER_PATH.exists():
+        raise FileNotFoundError(f"Label encoder file not found: {LABEL_ENCODER_PATH}")
+
+    model = joblib.load(MODEL_PATH)
+    label_encoder = joblib.load(LABEL_ENCODER_PATH)
+    return model, label_encoder
 
 
 def build_features(payload: dict) -> pd.DataFrame:
     """
     Build model input features exactly as required by training pipeline.
     """
-
     cpu_usage = payload["cpu_usage"]
     memory_usage = payload["memory_usage"]
     temperature = payload["temperature"]
@@ -59,6 +70,7 @@ def build_features(payload: dict) -> pd.DataFrame:
 
 
 def predict_system_health(payload: dict) -> dict:
+    model, label_encoder = load_artifacts()
     features = build_features(payload)
 
     pred_encoded = model.predict(features)[0]

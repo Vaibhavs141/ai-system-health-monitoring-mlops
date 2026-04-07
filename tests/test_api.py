@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+from unittest.mock import patch
 
 from api.app import app
 
@@ -17,7 +18,18 @@ def test_health():
     assert response.json()["status"] == "ok"
 
 
-def test_predict():
+@patch("api.app.predict_system_health")
+def test_predict(mock_predict):
+    mock_predict.return_value = {
+        "prediction_label": "warning",
+        "failure_probability": 0.42,
+        "class_probabilities": {
+            "healthy": 0.20,
+            "warning": 0.42,
+            "critical": 0.38,
+        },
+    }
+
     payload = {
         "cpu_usage": 78,
         "memory_usage": 72,
@@ -27,13 +39,13 @@ def test_predict():
         "fan_speed": 2400,
         "network_traffic": 85,
         "error_count": 3,
-        "response_time": 260
+        "response_time": 260,
     }
 
     response = client.post("/predict", json=payload)
     assert response.status_code == 200
 
     result = response.json()
-    assert "prediction_label" in result
+    assert result["prediction_label"] == "warning"
     assert "failure_probability" in result
     assert "class_probabilities" in result
