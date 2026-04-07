@@ -26,3 +26,4 @@ def test_preprocess_data_creates_output():
     output_df = pd.read_csv(PREPROCESSED_DATA_PATH)
     assert "cpu_usage" in output_df.columns
     assert "memory_usage" in output_df.columns
+    

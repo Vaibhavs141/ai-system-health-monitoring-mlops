@@ -21,3 +21,4 @@ TEST_DATA_PATH = PROCESSED_DIR / "test.csv"
 # Create folders if they do not exist
 for path in [RAW_DIR, INTERIM_DIR, PROCESSED_DIR]:
     path.mkdir(parents=True, exist_ok=True)
+    

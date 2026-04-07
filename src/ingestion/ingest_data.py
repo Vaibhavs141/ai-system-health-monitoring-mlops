@@ -16,7 +16,8 @@ def ingest_data(source_path: str) -> None:
     shutil.copy(source, RAW_DATA_PATH)
     print(f"Raw data copied to: {RAW_DATA_PATH}")
 
-
 if __name__ == "__main__":
-    source_file = "C:\\Users\\hp\\Downloads\\ai-system-health-monitoring\\src\\ingestion\\Laptop_Motherboard_Health_Monitoring_Dataset.csv"
+    source_file = Path(
+        "C:/Users/hp/Downloads/ai-system-health-monitoring/src/ingestion/Laptop_Motherboard_Health_Monitoring_Dataset.csv"
+    )
     ingest_data(source_file)

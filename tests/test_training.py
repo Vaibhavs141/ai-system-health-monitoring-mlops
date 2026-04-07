@@ -1,6 +1,4 @@
 import pandas as pd
-from pathlib import Path
-
 from src.training.train import load_data
 from src.utils.config import TRAIN_DATA_PATH, VAL_DATA_PATH
 

@@ -17,3 +17,4 @@ class PredictionResponse(BaseModel):
     prediction_label: str
     failure_probability: float
     class_probabilities: dict
+    

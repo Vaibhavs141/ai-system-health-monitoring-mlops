@@ -9,3 +9,4 @@ class RawSystemHealthRecord(BaseModel):
     DiskUsage: float = Field(..., ge=0, le=100)
     FanSpeed: float = Field(..., ge=0)
     ProblemDetected: str
+    
