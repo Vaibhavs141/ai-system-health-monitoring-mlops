@@ -14,7 +14,7 @@ ARTIFACTS_DIR = ROOT_DIR / "models" / "artifacts"
 LEAKAGE_COLUMNS = ["problem_detected", "risk_score", "failure_probability"]
 
 
-def evaluate_saved_model(model_name="random_forest_tuned.pkl"):
+def evaluate_saved_model(model_name="best_model.pkl"):
     test_df = pd.read_csv(TEST_DATA_PATH)
 
     X_test = test_df.drop(columns=["system_status"])

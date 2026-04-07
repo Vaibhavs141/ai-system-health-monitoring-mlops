@@ -1,3 +1,13 @@
-# Add patterns of files dvc should ignore, which could improve
-# the performance. Learn more at
-# https://dvc.org/doc/user-guide/dvcignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git/
+.github/
+.dvc/cache/
+mlruns/
+notebooks/
+tests/
+data/interim/
+data/processed/
+dvc_storage/
