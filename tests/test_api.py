@@ -37,4 +37,3 @@ def test_predict():
     assert "prediction_label" in result
     assert "failure_probability" in result
     assert "class_probabilities" in result
-    

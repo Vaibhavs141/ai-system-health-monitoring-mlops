@@ -59,4 +59,3 @@ def validate_data() -> None:
 
 if __name__ == "__main__":
     validate_data()
-    
