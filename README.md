@@ -359,13 +359,6 @@ prometheus --config.file=monitoring/prometheus.yml
 
 ---
 
-## 👨‍💻 Author
-
-**Vaibhav Shermale**
-M.Tech Data Science | AI & MLOps
-
----
-
 ## ⭐ Star This Project
 
 If you found this project useful, please consider giving it a ⭐ on GitHub — it helps others discover it!
