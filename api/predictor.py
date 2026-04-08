@@ -85,9 +85,11 @@ def predict_system_health(payload: dict) -> dict:
     }
 
     failure_probability = class_probabilities.get("critical", 0.0)
+    max_confidence = max(class_probabilities.values())
 
     return {
         "prediction_label": pred_label,
         "failure_probability": round(float(failure_probability), 6),
         "class_probabilities": class_probabilities,
+        "confidence": round(float(max_confidence), 6),
     }

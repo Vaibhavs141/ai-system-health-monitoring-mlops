@@ -16,4 +16,5 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     prediction_label: str
     failure_probability: float
+    confidence: float
     class_probabilities: dict

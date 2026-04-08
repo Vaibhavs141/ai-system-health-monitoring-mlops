@@ -12,3 +12,6 @@ evidently
 pyyaml
 pytest
 httpx
+prometheus-client
+streamlit
+requests
