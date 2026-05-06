@@ -18,11 +18,12 @@ def test_health():
     assert response.json()["status"] == "ok"
 
 
-@patch("api.app.predict_system_health")
+@patch("api.app.predict_system_health")  # keep this (assuming correct import in app.py)
 def test_predict(mock_predict):
     mock_predict.return_value = {
         "prediction_label": "warning",
         "failure_probability": 0.42,
+        "confidence": 0.85,  # ✅ REQUIRED FIX
         "class_probabilities": {
             "healthy": 0.20,
             "warning": 0.42,
@@ -43,9 +44,11 @@ def test_predict(mock_predict):
     }
 
     response = client.post("/predict", json=payload)
+
     assert response.status_code == 200
 
     result = response.json()
     assert result["prediction_label"] == "warning"
     assert "failure_probability" in result
     assert "class_probabilities" in result
+    assert "confidence" in result  # ✅ good practice
